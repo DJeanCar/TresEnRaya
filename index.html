@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3 en Raya</title>
+	<link rel="stylesheet" href="estilos.css">
+	<script src="jquery-1.10.2.js"></script>
+	<script src="script.js"></script>
+	<script>
+		$(document).ready(function(){
+			tres = new TresEnRaya();
+			tres.constructor();
+			$('.cuadrado').on('click', pulsa);
+			$('.limpiar').on("click",limpiar);
+
+			function limpiar(){
+				console.log("hola");
+				$('.cuadrado').each(function(){
+
+					$(this).removeClass('o');
+					$(this).removeClass('x');
+					$(this).text(" ");
+					tres.constructor()
+				});	
+			}
+
+			function pulsa(){
+			$(this).text('x');
+			$(this).addClass('x');
+			var fila = $(this).data('fila');
+			var columna = $(this).data('columna');
+			tres.pulsaBoton(fila,columna);
+			if (tres.finPartida()){
+				if(tres.ganador == 0)
+					$('#mensaje').text('Has Ganado');
+				if(tres.ganador == 1)
+					$('#mensaje').text('Has Perdido');
+				if(tres.ganador == -1)
+					$('#mensaje').text('Empate');
+			}
+		}
+
+		});
+		
+	</script>
+</head>
+<body>
+	<div data-fila="0" data-columna="0" class="cuadrado"></div>
+	<div data-fila="0" data-columna="1" class="cuadrado"></div>
+	<div data-fila="0" data-columna="2" class="cuadrado"></div>
+	<div data-fila="1" data-columna="0" class="cuadrado"></div>
+	<div data-fila="1" data-columna="1" class="cuadrado"></div>
+	<div data-fila="1" data-columna="2" class="cuadrado"></div>
+	<div data-fila="2" data-columna="0" class="cuadrado"></div>
+	<div data-fila="2" data-columna="1" class="cuadrado"></div>
+	<div data-fila="2" data-columna="2" class="cuadrado"></div>
+
+	<h2 id="mensaje"></h2>
+
+	<button class="limpiar">Empezar otro juego</button>
+
+	
+
+</body>
+</html>
