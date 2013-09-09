@@ -8,13 +8,14 @@
 	<script src="script.js"></script>
 	<script>
 		$(document).ready(function(){
+
 			tres = new TresEnRaya();
 			tres.constructor();
 			$('.cuadrado').on('click', pulsa);
 			$('.limpiar').on("click",limpiar);
 
 			function limpiar(){
-				console.log("hola");
+				
 				$('.cuadrado').each(function(){
 
 					$(this).removeClass('o');
@@ -22,6 +23,7 @@
 					$(this).text(" ");
 					tres.constructor()
 				});	
+				$('#mensaje').text("");
 			}
 
 			function pulsa(){
@@ -31,12 +33,26 @@
 			var columna = $(this).data('columna');
 			tres.pulsaBoton(fila,columna);
 			if (tres.finPartida()){
-				if(tres.ganador == 0)
-					$('#mensaje').text('Has Ganado');
-				if(tres.ganador == 1)
-					$('#mensaje').text('Has Perdido');
-				if(tres.ganador == -1)
+				if(tres.ganador == -1){
 					$('#mensaje').text('Empate');
+					alert("EMPATE");
+					limpiar();
+				}
+				
+				
+				if(tres.ganador == 0){
+					$('#mensaje').text('Has Ganado');
+					alert("HAS GANADOO");
+					limpiar();
+				}
+					
+				if(tres.ganador == 1){
+					$('#mensaje').text('Has Perdido');
+					alert("HAS PERDIDOO");
+					limpiar();
+				}
+					
+
 			}
 		}
 
